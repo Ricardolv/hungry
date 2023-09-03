@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  keycloak_hungry:
+    container_name: keycloak_hungry
+    image: jboss/keycloak:10.0.2
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - "8180:8080"
+
+  postgres_register_hungry:
+    container_name: postgres_register_hungry
+    image: postgres:13
+    environment:
+      POSTGRES_USER: register
+      POSTGRES_PASSWORD: register
+    ports:
+      - "5432:5432"
