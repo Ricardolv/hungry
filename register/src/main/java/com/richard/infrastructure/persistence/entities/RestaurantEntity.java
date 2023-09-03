@@ -1,6 +1,7 @@
 package com.richard.infrastructure.persistence.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class RestaurantEntity extends PanacheEntityBase {
 
     public String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public LocalizationEntity localization;
 
     @CreationTimestamp
