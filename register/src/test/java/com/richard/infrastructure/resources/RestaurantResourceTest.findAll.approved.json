@@ -1,0 +1,12 @@
+[
+    {
+        "id": 123,
+        "name": "Novo restaurante",
+        "owner": "ID do Keycloak"
+    },
+    {
+        "id": 456,
+        "name": "Novo restaurante 2",
+        "owner": "ID do Keycloak 2"
+    }
+]
