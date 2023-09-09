@@ -1,7 +1,10 @@
 package com.richard.infrastructure.resources;
 
+import com.richard.domain.RestaurantService;
 import com.richard.infrastructure.persistence.entities.DisheEntity;
 import com.richard.infrastructure.persistence.entities.RestaurantEntity;
+import com.richard.infrastructure.resources.dto.Restaurant;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -19,6 +22,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.util.List;
 import java.util.Optional;
 
+import static com.richard.infrastructure.resources.mapper.RestauratMapper.INSTANCE;
+
 @Path("/restaurants")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -26,15 +31,19 @@ import java.util.Optional;
 //@RolesAllowed("propietario")
 public class RestaurantResource {
 
+    @Inject
+    private RestaurantService restaurantService;
+
     @GET
-    public List<RestaurantEntity> findAll() {
-        return RestaurantEntity.listAll();
+    public List<Restaurant> findAll() {
+        var entities = restaurantService.listAll();
+        return entities.stream().map(INSTANCE::toRestaurant).toList();
     }
 
     @POST
     @Transactional
-    public Response create(RestaurantEntity dto) {
-        dto.persist();
+    public Response create(Restaurant request) {
+        restaurantService.save(INSTANCE.toRestaurantEntity(request));
         return Response
                 .status(Response.Status.CREATED)
                 .build();
