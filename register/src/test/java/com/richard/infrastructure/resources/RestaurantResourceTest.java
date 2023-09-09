@@ -27,7 +27,7 @@ public class RestaurantResourceTest {
                 .extract().asString();
 
         System.out.println("result: " + result);
-      //  Approvals.verify(result);
+        //Approvals.verify(result);
 
     }
 
